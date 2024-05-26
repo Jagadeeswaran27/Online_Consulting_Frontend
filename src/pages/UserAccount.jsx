@@ -1,6 +1,5 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { useEffect, useState } from "react";
 
 export default function UserAccount() {
   const { user, setLogin } = useContext(AppContext);
@@ -34,7 +33,15 @@ export default function UserAccount() {
       }
     }
     handleReload();
-  }, []);
+    if (window.location.pathname === "/account") {
+      history.pushState(null, "", "/account");
+      history.replaceState(null, "", "/");
+
+      window.onpopstate = () => {
+        window.location.pathname = "/";
+      };
+    }
+  }, [setLogin]);
 
   const formatDate = (dateString) => {
     const options = { month: "long", day: "numeric", year: "numeric" };
