@@ -10,7 +10,7 @@ export default function Services() {
     async function getServices() {
       try {
         const response = await fetch(
-          "https://online-consulting-backend.onrender.com/getServices"
+          `${import.meta.env.VITE_BACKEND_URL}/getServices`
         );
         if (response.ok) {
           const data = await response.json();

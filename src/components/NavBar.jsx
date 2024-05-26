@@ -15,7 +15,7 @@ export default function NavBar() {
     const token = sessionStorage.getItem("token");
     try {
       const response = await fetch(
-        "https://online-consulting-backend.onrender.com/logout",
+        `${import.meta.env.VITE_BACKEND_URL}/logout`,
         {
           headers: {
             Authorization: "Bearer " + token,
