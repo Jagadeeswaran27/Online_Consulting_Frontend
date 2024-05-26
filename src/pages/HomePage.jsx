@@ -4,7 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 export default function HomePage() {
-  const { setLogin, message } = useContext(AppContext);
+  const { setLogin } = useContext(AppContext);
   useEffect(() => {
     async function handleReload() {
       const token = sessionStorage.getItem("token");
