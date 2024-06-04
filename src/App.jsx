@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RootPage from "./pages/RootPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -10,6 +10,8 @@ import Consultants from "./pages/Consultants";
 import Consultant from "./pages/Consultant";
 import ServicesPage from "./pages/Services";
 import HelpPage from "./pages/HelpPage";
+import { Analytics } from "@vercel/analytics/react";
+import { inject } from "@vercel/analytics";
 export default function App() {
   const [state, setState] = useState({
     isLoggedIn: false,
@@ -17,6 +19,9 @@ export default function App() {
     message: null,
     consultationDetails: null,
   });
+  useEffect(() => {
+    inject();
+  }, []);
   function setLogin(user, consultationDetails) {
     setState(() => {
       return {
@@ -104,6 +109,7 @@ export default function App() {
   return (
     <AppContext.Provider value={ctxValue}>
       <RouterProvider router={router} />
+      <Analytics />
     </AppContext.Provider>
   );
 }
